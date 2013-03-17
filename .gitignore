@@ -1,0 +1,16 @@
+# ignore and created directories
+*/classes
+*.class
+deploy/
+*/deploy
+*/deploy/
+*/*svn/
+
+# package files
+*.jar
+*.war
+*.ear
+
+# temp files
+
+**/temp/
