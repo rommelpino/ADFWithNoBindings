@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:panelSplitter id="ps1" orientation="vertical"
+                          partialTriggers="pc1:ctb1">
+          <f:facet name="first">
+            <af:panelCollection id="pc1">
+              <f:facet name="toolbar">
+                <af:toolbar id="t2">
+                  <af:commandToolbarButton text="Add" id="ctb1"
+                                           actionListener="#{viewScope.simpleTableForm.addJob}"/>
+                  <af:commandToolbarButton text="View Selected"
+                                           id="ctb2"
+                                           actionListener="#{viewScope.simpleTableForm.viewSelected}"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table value="#{viewScope.simpleTableForm.jobList}" var="row"
+                        rowBandingInterval="0" id="t1"
+                        binding="#{viewScope.simpleTableForm.jobTable}"
+                        rowSelection="single"
+                        selectionListener="#{viewScope.simpleTableForm.tableRowSelected}"
+                        partialTriggers="::ctb1">
+                <af:column sortable="true" headerText="Job Id" id="c2"
+                           sortProperty="jobId">
+                  <af:inputText value="#{row.jobId}" id="ot2"
+                                autoSubmit="true"/>
+                </af:column>
+                <af:column sortable="true" headerText="Title" id="c4"
+                           sortProperty="jobTitle">
+                  <af:inputText value="#{row.jobTitle}" id="ot3"
+                                autoSubmit="true"/>
+                </af:column>
+                <af:column sortable="false" headerText="Max Salary" id="c1">
+                  <af:inputText value="#{row.maxSalary}" id="ot4"
+                                autoSubmit="true"/>
+                </af:column>
+                <af:column sortable="false" headerText="Min Salary" id="c3">
+                  <af:inputText value="#{row.minSalary}" id="ot1"
+                                autoSubmit="true"/>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </f:facet>
+          <f:facet name="second">
+            <af:panelGroupLayout id="pgl1" layout="vertical"
+                                 binding="#{viewScope.simpleTableForm.panelGroup1}">
+              <af:panelFormLayout id="pfl1"
+                                  rendered="#{viewScope.simpleTableForm.selectedJob ne null}">
+                <af:inputText label="Job Id" id="it1"
+                              value="#{viewScope.simpleTableForm.selectedJob.jobId}"
+                              readOnly="true"/>
+                <af:inputText label="Job Title" id="it2"
+                              value="#{viewScope.simpleTableForm.selectedJob.jobTitle}"
+                              readOnly="true"/>
+                <af:inputText label="Min Salary" id="it3"
+                              value="#{viewScope.simpleTableForm.selectedJob.minSalary}"
+                              readOnly="true"/>
+                <af:inputText label="Max Salary" id="it4"
+                              value="#{viewScope.simpleTableForm.selectedJob.maxSalary}"
+                              readOnly="true"/>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelSplitter>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

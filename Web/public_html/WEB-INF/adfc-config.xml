@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <managed-bean id="__4">
-    <managed-bean-name id="__1">tableForm</managed-bean-name>
-    <managed-bean-class id="__3">soadev.view.backing.TableForm</managed-bean-class>
+    <managed-bean-name id="__1">simpleTableForm</managed-bean-name>
+    <managed-bean-class id="__3">soadev.view.backing.SimpleTableForm</managed-bean-class>
     <managed-bean-scope id="__2">view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__11">
+    <managed-bean-name id="__10">basicCollectionModelForm</managed-bean-name>
+    <managed-bean-class id="__12">soadev.view.backing.BasicCollectionModelForm</managed-bean-class>
+    <managed-bean-scope id="__13">view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name id="__6">sortableFilterableForm</managed-bean-name>
+    <managed-bean-class id="__5">soadev.view.backing.SortableFilterableForm</managed-bean-class>
+    <managed-bean-scope id="__8">view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__9">
+    <managed-bean-name id="__14">sortableRowKeyForm</managed-bean-name>
+    <managed-bean-class id="__16">soadev.view.backing.SortableRowKeyForm</managed-bean-class>
+    <managed-bean-scope id="__15">view</managed-bean-scope>
   </managed-bean>
 </adfc-config>

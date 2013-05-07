@@ -11,6 +11,88 @@
     </startup>
   </adf-adfm-config>
   <adf:adf-properties-child xmlns="http://xmlns.oracle.com/adf/config/properties">
-    <adf-property name="adfAppUID" value="Application1.soadev"/>
+    <adf-property name="adfAppUID" value="ADFWithNoBindings.soadev"/>
   </adf:adf-properties-child>
+  <adf-faces-config xmlns="http://xmlns.oracle.com/adf/faces/config">
+    <persistent-change-manager>
+      <persistent-change-manager-class>oracle.adf.view.rich.change.MDSDocumentChangeManager</persistent-change-manager-class>
+    </persistent-change-manager>
+    <taglib-config>
+      <taglib uri="http://xmlns.oracle.com/adf/faces/rich">
+        <tag name="table">
+          <attribute name="filterVisible">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+        </tag>
+        <tag name="commandButton">
+          <attribute name="windowHeight">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="windowWidth">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+        </tag>
+        <tag name="column">
+          <attribute name="displayIndex">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="frozen">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="noWrap">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="selected">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="visible">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+          <attribute name="width">
+            <persist-changes>
+              true
+            </persist-changes>
+          </attribute>
+        </tag>
+      </taglib>
+    </taglib-config>
+  </adf-faces-config>
+  <adf-mds-config xmlns="http://xmlns.oracle.com/adf/mds/config">
+    <mds-config xmlns="http://xmlns.oracle.com/mds/config">
+      <persistence-config>
+        <metadata-namespaces>
+          <namespace path="/persdef" metadata-store-usage="metadata"/>
+        </metadata-namespaces>
+        <metadata-store-usages>
+          <metadata-store-usage id="metadata" deploy-target="true"
+                                default-cust-store="true"></metadata-store-usage>
+        </metadata-store-usages>
+      </persistence-config>
+      <cust-config>
+        <match path="/">
+          <customization-class name="oracle.adf.share.config.UserCC"/>
+        </match>
+      </cust-config>
+    </mds-config>
+  </adf-mds-config>
+  <adf-security-child xmlns="http://xmlns.oracle.com/adf/security/config">
+    <CredentialStoreContext credentialStoreClass="oracle.adf.share.security.providers.jps.CSFCredentialStore"
+                            credentialStoreLocation="../../src/META-INF/jps-config.xml"/>
+  </adf-security-child>
 </adf-config>
