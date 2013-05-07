@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:panelCollection id="pc1">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:commandToolbarButton text="Action" id="ctb1"
+                                       actionListener="#{viewScope.basicCollectionModelForm.action}"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table var="row" rowBandingInterval="0" id="t1"
+                    value="#{viewScope.basicCollectionModelForm.model}"
+                    rowSelection="multiple"
+                    binding="#{viewScope.basicCollectionModelForm.table}">
+            <af:column sortable="false" headerText="Job Id" align="start"
+                       id="c2" filterable="false">
+              <af:outputText value="#{row.jobId}" id="ot1"/>
+            </af:column>
+            <af:column sortable="false" headerText="Job Title" align="start"
+                       id="c4" filterable="false">
+              <af:outputText value="#{row.jobTitle}" id="ot4"/>
+            </af:column>
+            <af:column sortable="false" headerText="Max Salary" align="start"
+                       id="c1" filterable="false">
+              <af:outputText value="#{row.maxSalary}" id="ot3"/>
+            </af:column>
+            <af:column sortable="false" headerText="Min Salary" align="start"
+                       id="c3" filterable="false">
+              <af:outputText value="#{row.minSalary}" id="ot2"/>
+            </af:column>
+            <af:column sortable="false" headerText="Job Type" align="start"
+                       id="c5" filterable="false">
+              <af:outputText value="#{row.jobType.color}" id="ot5"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>
