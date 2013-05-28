@@ -20,4 +20,9 @@
     <managed-bean-class id="__16">soadev.view.backing.SortableRowKeyForm</managed-bean-class>
     <managed-bean-scope id="__15">view</managed-bean-scope>
   </managed-bean>
+  <managed-bean id="__17">
+    <managed-bean-name id="__19">lazyModelForm</managed-bean-name>
+    <managed-bean-class id="__20">soadev.view.backing.LazyModelForm</managed-bean-class>
+    <managed-bean-scope id="__18">view</managed-bean-scope>
+  </managed-bean>
 </adfc-config>
