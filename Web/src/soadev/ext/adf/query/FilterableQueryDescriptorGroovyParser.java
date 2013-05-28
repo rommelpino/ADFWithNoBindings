@@ -71,10 +71,10 @@ public class FilterableQueryDescriptorGroovyParser {
         var = var + ".";
         Map<String, Object> filterCriteria = descriptor.getFilterCriteria();
         StringWriter sw = new StringWriter();
-        ConjunctionCriterion conjunctionCriterion =
-            ((FilterableQueryDescriptorImpl)descriptor).getFilterConjunctionCriterion();
+        List<AttributeCriterion> criteria =
+            ((FilterableQueryDescriptorImpl)descriptor).parseFilterCriteria();
         int index = 0;
-        for (Criterion criterion : conjunctionCriterion.getCriterionList()) {
+        for (Criterion criterion : criteria) {
             if (criterion instanceof AttributeCriterionImpl) {
                 AttributeCriterionImpl attrCriterion =
                     (AttributeCriterionImpl)criterion;
