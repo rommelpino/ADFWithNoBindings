@@ -19,7 +19,7 @@ public abstract class LazySortableModel<T> extends CollectionModel {
     private int dataEndIndex = -1;
 
 
-    private int rowCount;
+    protected int rowCount;
 
     private List<T> data;
     private List<SortCriterion> criteria;
@@ -39,11 +39,11 @@ public abstract class LazySortableModel<T> extends CollectionModel {
             (rowIndex < dataStartIndex || rowIndex > dataEndIndex)) {
             load();
         }
-        if (data == null) {
+        if (data == null || data.isEmpty()) {
             return false;
         }
 
-        return rowIndex < getRowCount();
+        return rowIndex - dataStartIndex < data.size();
     }
 
     private void load() {
@@ -52,14 +52,20 @@ public abstract class LazySortableModel<T> extends CollectionModel {
         if (first < 0) {
             first = 0;
         }
+        load(first, pageSize);
+
+    }
+
+    private void load(int first, int pageSize) {
         this.data =
                 load(first, pageSize, getSortCriteria(), getFilterCriteria());
         this.dataStartIndex = first;
         this.dataEndIndex = first + pageSize - 1;
-
     }
 
-    public abstract int getRowCount();
+    public int getRowCount(){
+        return -1;
+    }
 
     public abstract int getPageSize();
 
@@ -88,12 +94,6 @@ public abstract class LazySortableModel<T> extends CollectionModel {
     public void setRowCount(int rowCount) {
         this.rowCount = rowCount;
     }
-
-    //    public List<T> load(int first, int pageSize, String sortField,
-    //                        SortOrder sortOrder, Map<String, String> filters) {
-    //        throw new UnsupportedOperationException("Lazy loading is not implemented.");
-    //    }
-    //
 
     public abstract List<T> load(int first, int pageSize,
                                  List<SortCriterion> sortCriteria,
@@ -130,7 +130,7 @@ public abstract class LazySortableModel<T> extends CollectionModel {
     }
 
     public void reload() {
-        setWrappedData(load(0, getPageSize(), getSortCriteria(),
-                            getFilterCriteria()));
+        load(0, getPageSize());
+        rowCount = -1;
     }
 }

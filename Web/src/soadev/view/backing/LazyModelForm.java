@@ -171,44 +171,48 @@ public class LazyModelForm {
 
     public class JobLazySortableModel extends LazySortableModel<Job> {
 
-        public int getRowCount() {
-            StringBuilder builder =
-                new StringBuilder("SELECT o FROM Job o");
-            String criteria = QueryLOV.parseFilterCriteria(getFilterCriteria(), true);
-            if(!"".equals(criteria)){
-                builder.append(" Where");
-            }
-            builder.append(criteria);
-            return (int)(long)getService().getResultCount(builder.toString());
-        }
-        
-        
+//        public int getRowCount() {
+//            if (rowCount == -1) {
+//                StringBuilder builder =
+//                    new StringBuilder("SELECT o FROM Job o");
+//                String criteria =
+//                    QueryLOV.parseFilterCriteria(getFilterCriteria(), true);
+//                if (!"".equals(criteria)) {
+//                    builder.append(" Where");
+//                }
+//                builder.append(criteria);
+//                rowCount =
+//                        (int)(long)getService().getResultCount(builder.toString());
+//            }
+//            return rowCount;
+//        }
 
 
         public List<Job> load(int first, int pageSize,
                               List<SortCriterion> sortCriteria,
                               List<AttributeCriterion> filterCriteria) {
-            StringBuilder builder =
-                new StringBuilder("Select o from Job o");
-            String criteria = QueryLOV.parseFilterCriteria(filterCriteria, true);
-            if(!"".equals(criteria)){
+            StringBuilder builder = new StringBuilder("Select o from Job o");
+            String criteria =
+                QueryLOV.parseFilterCriteria(filterCriteria, true);
+            if (!"".equals(criteria)) {
                 builder.append(" Where");
             }
             builder.append(criteria);
-            if(sortCriteria != null && !sortCriteria.isEmpty()){
+            if (sortCriteria != null && !sortCriteria.isEmpty()) {
                 builder.append(" order by ");
                 int i = 0;
-                for(SortCriterion sc: sortCriteria){
-                    if(i++ > 0){
+                for (SortCriterion sc : sortCriteria) {
+                    if (i++ > 0) {
                         builder.append(", ");
                     }
                     builder.append("o.");
                     builder.append(sc.getProperty());
                     builder.append(" ");
-                    builder.append(sc.isAscending()? "": "DESC");
+                    builder.append(sc.isAscending() ? "" : "DESC");
                 }
             }
-            return (List<Job>)getService().queryByRange(builder.toString(), null, first, pageSize);
+            return (List<Job>)getService().queryByRange(builder.toString(),
+                                                        null, first, pageSize);
         }
 
         public int getPageSize() {
